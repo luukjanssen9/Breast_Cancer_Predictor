@@ -22,4 +22,8 @@ python -m venv .venv
 ### Install dependencies
 pip install -r requirements.txt
 
+### Running React
+cd breast-cancer-model
+npm start
+
 
