@@ -1,4 +1,11 @@
-## Setup Instructions"
+## Projcet Details
+### Dataset
+We are using the [Breast Cancer Wisconsin Diagnostic Dataset](https://www.kaggle.com/datasets/utkarshx27/breast-cancer-wisconsin-diagnostic-dataset) 
+
+### Model
+
+
+## Setup Instructions
 
 ### On Linux/macOS
 python -m venv .venv
@@ -14,4 +21,5 @@ python -m venv .venv
 
 ### Install dependencies
 pip install -r requirements.txt
+
 
