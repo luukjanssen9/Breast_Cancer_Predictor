@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
 # import data
@@ -45,3 +47,14 @@ print(f"X_train: {X_train}")
 print(f"X_test: {X_test}")
 print(f"Y_train: {Y_train.head()}")
 print(f"Y_test: {Y_test.head()}")
+
+
+# Fitting classifier to the Training set
+classifier = SVC(random_state=0) # for non-linear model use this parametre kernel='rbf'
+classifier.fit(X_train, Y_train)
+
+# Predicting the Test set results
+Y_pred = classifier.predict(X_test)
+
+# Making the Confusion Matrix
+cm = confusion_matrix(Y_test, Y_pred)
