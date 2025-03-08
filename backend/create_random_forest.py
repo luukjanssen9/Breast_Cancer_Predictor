@@ -94,10 +94,10 @@ print(f"Random Forest Accuracy: {accuracy:.4f}")
 print("Classification Report:\n", classification_report(y_test, y_pred))
 
 
-with open('rf_model.pkl', 'wb') as f:
+with open('models/rf_model.pkl', 'wb') as f:
     pickle.dump(rf_model, f)
 
-with open('rf_scaler.pkl', 'wb') as f:
+with open('models/rf_scaler.pkl', 'wb') as f:
     pickle.dump(scaler, f)
 
 print("Model and scaler saved successfully!")
