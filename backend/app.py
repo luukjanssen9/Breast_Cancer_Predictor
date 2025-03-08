@@ -11,12 +11,12 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Get the backend directory dynamically
-base_dir = Path(__file__).resolve().parent  # Assuming app.py is inside backend/
+base_dir = Path(__file__).resolve().parent  
 model_path = base_dir / "svm_model.pkl"
 scaler_path = base_dir / "scaler.pkl"
 
-print(f"Model Path: {model_path}")
-print(f"Scaler Path: {scaler_path}")
+# print(f"Model Path: {model_path}")
+# print(f"Scaler Path: {scaler_path}")
 
 # Load the model and scaler if they exist
 if model_path.exists() and scaler_path.exists():
@@ -24,9 +24,9 @@ if model_path.exists() and scaler_path.exists():
         model = pickle.load(f)
     with open(scaler_path, 'rb') as f:
         scaler = pickle.load(f)
-    print("✅ Model and Scaler loaded successfully.")
+    print("Model and Scaler loaded successfully.")
 else:
-    print("❌ Model files not found. Please train and save the model first.")
+    print("Model files not found. Please train and save the model first.")
     exit(1)  # Exit if model files are missing
 
 # Define expected features (MATCHES TRAINING DATA)
