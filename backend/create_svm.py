@@ -21,12 +21,12 @@ print(df['y'].value_counts())
 # Remove unnecessary column
 df = df.drop(df.columns[0], axis=1)
 
-mean_columns = [col for col in df.columns if 'mean' in col]
+#mean_columns = [col for col in df.columns if 'mean' in col]
 # Add the target column (y) to the selected columns
-selected_columns = mean_columns + ['y']
+#selected_columns = mean_columns + ['y']
 
 # Create a new dataframe with only the selected columns
-df = df[selected_columns]
+#df = df[selected_columns]
 
 # Ensure consistent feature naming
 df.columns = [col.replace('_pts_', '_points_') for col in df.columns]
