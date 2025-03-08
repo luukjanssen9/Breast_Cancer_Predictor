@@ -26,6 +26,11 @@ breast-cancer-model/node_modules
 .env.test.local
 .env.production.local
 
+<<<<<<< HEAD
 # pickle files
 /backend/svm_model.pkl
 /backend/scaler.pkl
+=======
+
+*.pkl
+>>>>>>> main
