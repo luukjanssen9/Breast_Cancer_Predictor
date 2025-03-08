@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
+  // Form Input Values
   const [formData, setFormData] = useState({
     radius_mean: "",
     texture_mean: "",
@@ -15,14 +16,18 @@ function App() {
     fractal_dim_mean: "",
   });
 
+  // Prediction Results
   const [prediction, setPrediction] = useState(null);
+  // Loading State
   const [loading, setLoading] = useState(false);
+  // Error state
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      // update field
       [name]: value,
     });
   };

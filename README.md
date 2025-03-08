@@ -26,4 +26,8 @@ pip install -r requirements.txt
 cd breast-cancer-model
 npm start
 
+### Running Backend
+cd backend
+python3 app.py
+
 
