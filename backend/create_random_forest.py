@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import pickle
 
 # Load dataset
 df = pd.read_csv("brca.csv")
@@ -26,6 +27,16 @@ df = df.dropna(axis=1)
 
 # Check dataset info
 df.info()
+
+mean_columns = [col for col in df.columns if 'mean' in col]
+# Add the target column (y) to the selected columns
+selected_columns = mean_columns + ['y']
+
+# Create a new dataframe with only the selected columns
+df = df[selected_columns]
+
+# Ensure consistent feature naming
+df.columns = [col.replace('_pts_', '_points_') for col in df.columns]
 
 # Define features and target variable
 X = df.drop(columns=['y'])  # Features (all except target)
@@ -82,3 +93,11 @@ accuracy = accuracy_score(y_test, y_pred)
 print(f"Random Forest Accuracy: {accuracy:.4f}")
 print("Classification Report:\n", classification_report(y_test, y_pred))
 
+
+with open('rf_model.pkl', 'wb') as f:
+    pickle.dump(rf_model, f)
+
+with open('rf_scaler.pkl', 'wb') as f:
+    pickle.dump(scaler, f)
+
+print("Model and scaler saved successfully!")

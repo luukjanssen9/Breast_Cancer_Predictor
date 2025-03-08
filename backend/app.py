@@ -13,7 +13,7 @@ CORS(app)  # Enable CORS for all routes
 # Get the backend directory dynamically
 base_dir = Path(__file__).resolve().parent  
 model_path = base_dir / "svm_model.pkl"
-scaler_path = base_dir / "scaler.pkl"
+scaler_path = base_dir / "svm_scaler.pkl"
 
 # print(f"Model Path: {model_path}")
 # print(f"Scaler Path: {scaler_path}")
