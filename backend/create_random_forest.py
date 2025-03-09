@@ -28,16 +28,14 @@ df = df.dropna(axis=1)
 # Check dataset info
 df.info()
 
-mean_columns = [col for col in df.columns if 'mean' in col]
-# Add the target column (y) to the selected columns
-selected_columns = mean_columns + ['y']
-
-# Create a new dataframe with only the selected columns
-df = df[selected_columns]
-
 # Ensure consistent feature naming
 df.columns = [col.replace('_pts_', '_points_') for col in df.columns]
 
+# Create a new dataframe with only the selected columns
+df = df[['x.area_worst', 'x.concave_points_worst', 'x.radius_worst',
+         'x.perimeter_worst', 'x.concave_points_mean', 'y']]
+
+df.info()
 # Define features and target variable
 X = df.drop(columns=['y'])  # Features (all except target)
 y = df['y']  # Target (M=1, B=0)

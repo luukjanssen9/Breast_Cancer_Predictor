@@ -3,9 +3,8 @@ import { sendPrediction } from "../api/api.js";  // Helper function to send requ
 
 function RFPage() {
   const [formData, setFormData] = useState({
-    radius_mean: "", texture_mean: "", perimeter_mean: "", area_mean: "",
-    smoothness_mean: "", compactness_mean: "", concavity_mean: "",
-    concave_points_mean: "", symmetry_mean: "", fractal_dim_mean: ""
+    area_worst: "", concave_points_worst: "", radius_worst: "", perimeter_worst: "",
+    concave_points_mean: ""
   });
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
