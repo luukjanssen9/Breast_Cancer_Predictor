@@ -1,0 +1,66 @@
+ # Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+df = pd.read_csv("/Users/zhangjiawen/Downloads/brca.csv")
+
+# Remove the unnecessary index column
+df = df.drop(columns=['Unnamed: 0'], errors='ignore')
+
+# Convert target column 'y' to numeric 
+df['y'] = df['y'].map({'M': 1, 'B': 0})
+
+# Define features (X) and target (y)
+X = df.drop(columns=['y'])  # Features
+y = df['y']  # Target
+
+# 80 vs 20
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+# Normalize 
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+
+
+# Train
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train_scaled, y_train)
+
+# Make predictions
+y_pred = rf_model.predict(X_test_scaled)
+
+# Compute accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f"\nRandom Forest Model Accuracy: {accuracy:.4f}")
+
+# Print classification report
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+
+plt.figure(figsize=(6, 4))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues', xticklabels=['Benign', 'Malignant'], yticklabels=['Benign', 'Malignant'])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix")
+plt.show()
+
+
+# Get feature importance scores
+feature_importances = pd.Series(rf_model.feature_importances_, index=X.columns).sort_values(ascending=False)
+
+# Plot feature importance
+plt.figure(figsize=(10, 6))
+sns.barplot(x=feature_importances.values, y=feature_importances.index, hue=feature_importances.index, palette="coolwarm", legend=False)
+plt.xlabel("Importance Score")
+plt.ylabel("Feature Name")
+plt.title("Feature Importance in Random Forest")
+plt.show()
+
