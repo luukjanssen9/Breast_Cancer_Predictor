@@ -1,0 +1,89 @@
+# Install TensorFlow if not already installed
+!pip install tensorflow
+
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping
+
+# Load dataset
+df = pd.read_csv("/Users/zhangjiawen/Downloads/data.csv")
+
+# Drop ID 
+df = df.drop(columns=['id'], errors='ignore')
+df = df.dropna(axis=1)  
+
+# Convert diagnosis
+df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
+
+# Define features and target variable
+X = df.drop(columns=['diagnosis'])  # Features
+y = df['diagnosis']  # Target
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+# Normalization
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Build Neural Network Model
+from tensorflow.keras.layers import Input
+model = Sequential([
+    Input(shape=(X_train_scaled.shape[1],)),  
+    Dense(32, activation='relu'),
+    Dense(16, activation='relu'),
+    Dropout(0.3),
+    Dense(1, activation='sigmoid')  
+])
+
+# Compile the model
+model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+#history = model.fit(X_train_scaled, y_train, epochs=50, batch_size=16, validation_data=(X_test_scaled, y_test), verbose=1)
+
+# Define Early Stopping to stop training if val_loss doesn't improve for 5 epochs
+early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True, verbose=1)
+
+# Train the model with Early Stopping
+history = model.fit(X_train_scaled, y_train, 
+                    epochs=50, batch_size=16, 
+                    validation_data=(X_test_scaled, y_test), 
+                    callbacks=[early_stopping],  # Apply Early Stopping
+                    verbose=1)
+
+
+
+# Evaluate the model
+loss, accuracy = model.evaluate(X_test_scaled, y_test)
+#print(f"Neural Network Accuracy: {accuracy:.4f}")
+
+# Plot Training and Validation Accuracy
+plt.figure(figsize=(8, 5))
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
+plt.legend()
+plt.title("Training and Validation Accuracy")
+plt.show()
+
+# Plot Training and Validation Loss
+plt.figure(figsize=(8, 5))
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.legend()
+plt.title("Training and Validation Loss")
+plt.show()
