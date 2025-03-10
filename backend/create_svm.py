@@ -21,15 +21,13 @@ print(df['y'].value_counts())
 # Remove unnecessary column
 df = df.drop(df.columns[0], axis=1)
 
-#mean_columns = [col for col in df.columns if 'mean' in col]
-# Add the target column (y) to the selected columns
-#selected_columns = mean_columns + ['y']
-
-# Create a new dataframe with only the selected columns
-#df = df[selected_columns]
-
 # Ensure consistent feature naming
 df.columns = [col.replace('_pts_', '_points_') for col in df.columns]
+
+# Create a new dataframe with only the selected columns
+df = df[['x.area_worst', 'x.concave_points_worst', 'x.radius_worst',
+         'x.perimeter_worst', 'x.concave_points_mean', 'y']]
+
 
 # Split into X and Y
 X = df.drop('y', axis=1)
@@ -63,10 +61,10 @@ y_pred = classifier.predict(X_test_scaled)
 print("Linear Kernel")
 print(classification_report(Y_test, y_pred))
 
-with open('svm_model.pkl', 'wb') as f:
+with open('models/svm_model.pkl', 'wb') as f:
     pickle.dump(classifier, f)
 
-with open('scaler.pkl', 'wb') as f:
+with open('models/svm_scaler.pkl', 'wb') as f:
     pickle.dump(scaler, f)
 
 print("Model and scaler saved successfully!")
