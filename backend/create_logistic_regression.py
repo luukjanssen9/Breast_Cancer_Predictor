@@ -15,7 +15,7 @@ df = pd.read_csv("brca.csv")
 df = df.drop(df.columns[0], axis=1)
 
 # Convert 'diagnosis' to numerical values (M -> 1, B -> 0)
-df['y'] = df['y'].map({'M': 1, 'B': 0})
+df['y'] = df['y'].map({'M': 0, 'B': 1})
 
 # Drop the 'Unnamed: 32' column if it exists
 df = df.dropna(axis=1)
