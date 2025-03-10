@@ -9,7 +9,7 @@ __pycache__/
 .venv/
 
 #  dependencies
-breast-cancer-model/node_modules
+node_modules
 /.pnp
 .pnp.js
 
