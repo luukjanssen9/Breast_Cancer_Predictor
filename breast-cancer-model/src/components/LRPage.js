@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { sendPrediction } from "../api/api.js"; // Helper function for requests
-import "../styles/SVMPage.css"; // Import the updated CSS
+import "../styles/LRPage.css"; // Import the updated CSS
 
-function SVMPage() {
+function LRPage() {
   const [formData, setFormData] = useState({
     area_worst: "",
     concave_points_worst: "",
@@ -27,7 +27,7 @@ function SVMPage() {
     setPrediction(null);
 
     try {
-      const result = await sendPrediction(formData, "svm");
+      const result = await sendPrediction(formData, "logistic_regression");
       setPrediction(result.prediction);
     } catch (err) {
       setError(err.message);
@@ -37,9 +37,9 @@ function SVMPage() {
   };
 
   return (
-    <div className="svm-container">
-      <h2>Support Vector Machine Model</h2>
-      <form onSubmit={handleSubmit} className="svm-form">
+    <div className="logistic-container">
+      <h2>Logistic Regression Model</h2>
+      <form onSubmit={handleSubmit} className="logistic-form">
         {Object.keys(formData).map((key) => (
           <div key={key} className="form-group">
             <label>{key.replace(/_/g, " ")}:</label>
@@ -67,4 +67,4 @@ function SVMPage() {
   );
 }
 
-export default SVMPage;
+export default LRPage;

@@ -15,6 +15,9 @@ function ModelSelection() {
         <button className="model-btn" onClick={() => navigate("/random-forest")}>
           Random Forest Model
         </button>
+        <button className="model-btn" onClick={() => navigate("/logistic-regression")}>
+          Logistic Regression Model
+        </button>
       </div>
     </div>
   );
