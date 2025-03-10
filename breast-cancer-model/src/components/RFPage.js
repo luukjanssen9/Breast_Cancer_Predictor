@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { sendPrediction } from "../api/api.js";  // Helper function to send requests
+import { sendPrediction } from "../api/api.js"; // Helper function for requests
+import "../styles/RFPage.css"; // Import the updated CSS
 
 function RFPage() {
   const [formData, setFormData] = useState({
-    area_worst: "", concave_points_worst: "", radius_worst: "", perimeter_worst: "",
-    concave_points_mean: ""
+    area_worst: "",
+    concave_points_worst: "",
+    radius_worst: "",
+    perimeter_worst: "",
+    concave_points_mean: "",
   });
+
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -32,19 +37,32 @@ function RFPage() {
   };
 
   return (
-    <div className="App">
-      <h2>RF Model</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="rf-container">
+      <h2>Random Forest Model</h2>
+      <form onSubmit={handleSubmit} className="rf-form">
         {Object.keys(formData).map((key) => (
-          <label key={key}>
-            {key.replace("_", " ")}:
-            <input type="number" name={key} value={formData[key]} onChange={handleChange} required step="0.01" />
-          </label>
+          <div key={key} className="form-group">
+            <label>{key.replace(/_/g, " ")}:</label>
+            <input
+              type="number"
+              name={key}
+              value={formData[key]}
+              onChange={handleChange}
+              required
+              step="0.01"
+            />
+          </div>
         ))}
-        <button type="submit" disabled={loading}>{loading ? "Processing..." : "Predict"}</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Processing..." : "Predict"}
+        </button>
       </form>
-      {error && <p className="error">Error: {error}</p>}
-      {prediction !== null && <p className="result">Prediction: {prediction === 1 ? "Benign" : "Malignant"}</p>}
+      {error && <p className="error-message">Error: {error}</p>}
+      {prediction !== null && (
+        <p className={`result-message ${prediction === 1 ? "benign" : "malignant"}`}>
+          Prediction: {prediction === 1 ? "Benign" : "Malignant"}
+        </p>
+      )}
     </div>
   );
 }

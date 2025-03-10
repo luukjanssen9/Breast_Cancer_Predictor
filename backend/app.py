@@ -14,24 +14,29 @@ base_dir = Path(__file__).resolve().parent / "models"
 # Load models
 models = {
     "svm": pickle.load(open(base_dir / "svm_model.pkl", "rb")),
-    "random_forest": pickle.load(open(base_dir / "rf_model.pkl", "rb"))
+    "random_forest": pickle.load(open(base_dir / "rf_model.pkl", "rb")),
+    "logistic_regression": pickle.load(open(base_dir / "log_model.pkl", "rb"))
 }
 
 # Load scalers (each model has its own scaler)
 scalers = {
     "svm": pickle.load(open(base_dir / "svm_scaler.pkl", "rb")),
-    "random_forest": pickle.load(open(base_dir / "rf_scaler.pkl", "rb"))
+    "random_forest": pickle.load(open(base_dir / "rf_scaler.pkl", "rb")),
+    "logistic_regression": pickle.load(open(base_dir / "log_scaler.pkl", "rb"))
 }
 
 # Define expected features for each model
 # If features need to be changed it needs to be done here, in the js file and in the create_<mode> file
 feature_sets = {
     "svm": [
-        'x.radius_mean', 'x.texture_mean', 'x.perimeter_mean', 'x.area_mean',
-        'x.smoothness_mean', 'x.compactness_mean', 'x.concavity_mean',
-        'x.concave_points_mean', 'x.symmetry_mean', 'x.fractal_dim_mean'
+        'x.area_worst', 'x.concave_points_worst', 'x.radius_worst',
+        'x.perimeter_worst', 'x.concave_points_mean'
     ],
     "random_forest": [
+        'x.area_worst', 'x.concave_points_worst', 'x.radius_worst',
+        'x.perimeter_worst', 'x.concave_points_mean'
+    ],
+    "logistic_regression": [
         'x.area_worst', 'x.concave_points_worst', 'x.radius_worst',
         'x.perimeter_worst', 'x.concave_points_mean'
     ]
