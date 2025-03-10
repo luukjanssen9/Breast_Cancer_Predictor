@@ -28,3 +28,4 @@ breast-cancer-model/node_modules
 
 
 *.pkl
+/ablation/venv
