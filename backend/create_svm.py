@@ -37,7 +37,7 @@ print(f"X head: {X.head()}")
 print(f"Y head: {Y.head()}")
 
 # Split the data into training and testing sets (80-20 split)
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=37)
 
 # Scale the data
 scaler = StandardScaler()
@@ -61,10 +61,10 @@ y_pred = classifier.predict(X_test_scaled)
 print("Linear Kernel")
 print(classification_report(Y_test, y_pred))
 
-with open('svm_model.pkl', 'wb') as f:
+with open('models/svm_model.pkl', 'wb') as f:
     pickle.dump(classifier, f)
 
-with open('svm_scaler.pkl', 'wb') as f:
+with open('models/svm_scaler.pkl', 'wb') as f:
     pickle.dump(scaler, f)
 
 print("Model and scaler saved successfully!")
