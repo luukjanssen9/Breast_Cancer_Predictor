@@ -51,7 +51,7 @@ Y_test = Y_test.replace(['B'], 1)
 Y_test = Y_test.replace(['M'], 0)
 
 # Fitting classifier to the Training set
-classifier = SVC(kernel="linear", random_state=0, probability=True)
+classifier = SVC(kernel="linear", C=10, gamma=0.1, random_state=0, probability=True)
 classifier.fit(X_train_scaled, np.asarray(Y_train))
 
 print("Model trained with features:", X.columns.tolist())  # Add this in training script
@@ -61,10 +61,10 @@ y_pred = classifier.predict(X_test_scaled)
 print("Linear Kernel")
 print(classification_report(Y_test, y_pred))
 
-with open('models/svm_model.pkl', 'wb') as f:
+with open('svm_model.pkl', 'wb') as f:
     pickle.dump(classifier, f)
 
-with open('models/svm_scaler.pkl', 'wb') as f:
+with open('svm_scaler.pkl', 'wb') as f:
     pickle.dump(scaler, f)
 
 print("Model and scaler saved successfully!")
