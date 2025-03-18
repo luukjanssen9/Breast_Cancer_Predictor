@@ -7,9 +7,10 @@ __pycache__/
 
 # Virtual Environment
 .venv/
+/ablation/venv
 
 #  dependencies
-breast-cancer-model/node_modules
+node_modules
 /.pnp
 .pnp.js
 
@@ -25,7 +26,6 @@ breast-cancer-model/node_modules
 .env.development.local
 .env.test.local
 .env.production.local
-
-
 *.pkl
-/ablation/venv
+backend/SVM_Analysis/_discarded_rfecv_gridsearch.py
+
