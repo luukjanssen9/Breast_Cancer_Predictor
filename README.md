@@ -7,13 +7,14 @@ This project aims to build a machine learning model for breast cancer detection 
 We are using the [Breast Cancer Wisconsin Diagnostic Dataset](https://www.kaggle.com/datasets/utkarshx27/breast-cancer-wisconsin-diagnostic-dataset). This dataset contains features computed from digitized images of fine needle aspirate (FNA) biopsies of breast mass tissues.
 
 ## Model
-This project includes three different machine learning models:
+This project includes four different machine learning models:
 - **Support Vector Machine (SVM)**
 - **Logistic Regression**
 - **Random Forest**
+- **Artificial Neural Network**
 
 Each model has a corresponding script (`create_svm.py`, `create_logistic_regression.py`, `create_random_forest.py`) that can be run to train the model and generate the necessary `.pkl` files for the model and the feature scaler. The trained models are stored as pickle files (`backend/[model_name]_model.pkl`), and the scalers are stored as (`backend/[model_name]_scaler.pkl`) in the models folder, once the corresponding scripts have been run.
-
+*ANN doesn't have webapp functionality yet, but the code can be found in (`backend/ann`)
 ## Setup Instructions
 
 ### 1. Create a Virtual Environment
