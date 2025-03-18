@@ -7,7 +7,7 @@ __pycache__/
 
 # Virtual Environment
 .venv/
-/ablation/venv
+./backend/ann/venv
 
 #  dependencies
 node_modules
@@ -29,3 +29,4 @@ node_modules
 *.pkl
 backend/SVM_Analysis/_discarded_rfecv_gridsearch.py
 
+/backend/ann/venv
