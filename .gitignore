@@ -7,6 +7,7 @@ __pycache__/
 
 # Virtual Environment
 .venv/
+/ablation/venv
 
 #  dependencies
 node_modules
@@ -25,5 +26,6 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
-backend/SVM_Analysis/_discarded_rfecv_gridsearch.py
 *.pkl
+backend/SVM_Analysis/_discarded_rfecv_gridsearch.py
+
